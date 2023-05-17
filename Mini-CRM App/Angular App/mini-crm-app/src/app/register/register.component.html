@@ -1,0 +1,38 @@
+<div class="container" style="height: 600px; align-items: center;">
+  <div class="form-wrapper">
+    <h2>Register</h2>
+    <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+      <mat-form-field appearance="outline" class="mat-field">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" formControlName="email" required class="mat-input">
+        <mat-error *ngIf="registerForm.get('email')?.hasError('required') && registerForm.get('email')?.touched">
+          Email is required.
+        </mat-error>
+        <mat-error *ngIf="registerForm.get('email')?.hasError('email') && registerForm.get('email')?.touched">
+          Invalid email format.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="mat-field">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" formControlName="password" required class="mat-input">
+        <mat-error *ngIf="registerForm.get('password')?.hasError('required') && registerForm.get('password')?.touched">
+          Password is required.
+        </mat-error>
+        <mat-error *ngIf="registerForm.get('password')?.hasError('minlength') && registerForm.get('password')?.touched">
+          Password should be at least 6 characters long.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="mat-field">
+        <mat-label>Name</mat-label>
+        <input matInput type="text" formControlName="name" required class="mat-input">
+        <mat-error *ngIf="registerForm.get('name')?.hasError('required') && registerForm.get('name')?.touched">
+          Name is required.
+        </mat-error>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit" [disabled]="registerForm.invalid">Register</button>
+    </form>
+  </div>
+</div>
