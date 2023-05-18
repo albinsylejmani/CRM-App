@@ -11,12 +11,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSnackBarModule } from '@angular/material/snack-bar'; // Import MatSnackBarModule
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { HomepageComponent } from './homepage/homepage.component'; // Import MatSnackBarModule
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    HomepageComponent
   ],
   imports: [
     BrowserModule,

@@ -14,4 +14,9 @@ export class AuthService {
     const user = { email, password, name };
     return this.http.post(`${this.apiUrl}/register`, user);
   }
+
+  login(email: string, password: string): Observable<any> {
+    const user = { email, password };
+    return this.http.post(`${this.apiUrl}/login`, user);
+  }
 }
