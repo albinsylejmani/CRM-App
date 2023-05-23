@@ -19,4 +19,14 @@ export class AuthService {
     const user = { email, password };
     return this.http.post(`${this.apiUrl}/login`, user);
   }
+  // logout(): Observable<any> {
+  //   return this.http.post(`${this.apiUrl}/logout`, null);
+  // }
+  // isLoggedIn(): boolean {
+  //   // Check if the user is logged in based on your authentication mechanism (e.g., token presence)
+  //   // Return true or false accordingly
+  // }
+  // getUserInfo(): Observable<any> {
+  //   return this.http.get(`${this.apiUrl}/user`);
+  // }
 }
