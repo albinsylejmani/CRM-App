@@ -3,6 +3,7 @@ import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { AuthService } from '../auth.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { last } from 'rxjs';
 @Component({
   selector: 'app-register',
   templateUrl: 'register.component.html',
@@ -17,7 +18,8 @@ export class RegisterComponent implements OnInit {
     this.registerForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, Validators.minLength(6)]),
-      name: new FormControl('', [Validators.required])
+      name: new FormControl('', [Validators.required]),
+      lastname: new FormControl('', [Validators.required])
     });
   }
 
@@ -26,8 +28,8 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
-    const { email, password, name } = this.registerForm.value;
-    this.authService.register(email, password, name).subscribe(
+    const { email, password, name, lastname} = this.registerForm.value;
+    this.authService.register(email, password, name, lastname).subscribe(
       response => {
         // Handle successful registration (e.g., show success message, redirect)
       },

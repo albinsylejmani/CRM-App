@@ -1,0 +1,11 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Controllers",
+    "\\Interface",
+    "\\Models",
+    "\\Repository"
+  ],
+  "SelectedNode": "\\YourDbContext.cs",
+  "PreviewInSolutionExplorer": false
+}

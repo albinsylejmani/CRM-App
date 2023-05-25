@@ -1,34 +1,19 @@
-.login-form {
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 600px;
+}
+
+.form-wrapper {
   width: 300px;
   margin: 0 auto;
   padding: 30px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  background-color: #f5f5f5;
 }
 
-.login-form label {
+.form-wrapper h2 {
   font-weight: bold;
-}
-
-.login-form input {
-  width: 100%;
-  padding: 5px;
-  margin-bottom: 10px;
-}
-
-.login-form button {
-  width: 100%;
-  padding: 10px;
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.login-form button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
 }
 
 .mat-form {
@@ -43,50 +28,30 @@
   max-width: 100%;
 }
 
-button {
-  width: 200px;
-  align-self: center;
-}
-
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 20vh;
-}
-.form-wrapper {
-  width: 300px;
-  margin: 0 auto;
-  padding: 30px;
-  background-color: #f5f5f5;
-  
-  
-}
-
-.form-wrapper h2 {
-  font-weight: bold;
-}
-
-.form-wrapper input {
+.mat-input {
   width: 100%;
   padding: 5px;
   margin-bottom: 10px;
   box-sizing: border-box;
 }
 
-.form-wrapper button {
+.mat-field button {
   width: 100%;
   padding: 10px;
   background-color: #4caf50;
   color: white;
   border: none;
-  
   cursor: pointer;
 }
 
-.form-wrapper button:disabled {
+.mat-field button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
 }
 
-
+.mat-field .mat-form-field {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+}
