@@ -3,19 +3,15 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  loginForm: FormGroup = new FormGroup({});
-
-  email: string = '';
-  password: string = '';
+  loginForm!: FormGroup;
   errorMessage: string = '';
-  
+
   constructor(private formBuilder: FormBuilder, private router: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
@@ -30,15 +26,19 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin(): void {
-    this.authService.login(this.email, this.password).subscribe(
-      (response) => {
-        localStorage.setItem('access_token', response.token);
+    const { email, password } = this.loginForm.value;
 
-        this.router.navigate(['/'])
+    this.authService.login(email, password).subscribe(
+      (response) => {
+        // Handle successful login
+        console.log('Login successful', response);
+        // Additional logic or redirection
       },
       (error) => {
-        this.errorMessage = 'Invalid email or password.';
+        // Handle login error
+        console.error('Login failed', error);
+        // Display error message or perform other actions
       }
-    )
+    );
   }
 }

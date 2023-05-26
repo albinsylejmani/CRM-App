@@ -1,0 +1,7 @@
+use CrmDB
+
+CREATE TABLE Login (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    Username NVARCHAR(50) NOT NULL,
+    Password NVARCHAR(50) NOT NULL
+);

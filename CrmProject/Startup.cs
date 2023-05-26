@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using CrmProject.Repositories;
-//using CrmProject.Database;
+using CrmProject.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.SqlServer;
 
@@ -21,25 +21,42 @@ namespace CrmProject
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAllOrigins",
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:4200")
+                               .AllowAnyHeader()
+                               .AllowAnyMethod();
+                    });
+            });
+
             services.AddControllers();
 
             services.AddScoped<IRegisterRepository, RegisterRepository>();
+            services.AddScoped<ILoginRepository, LoginRepository>();
 
-            //services.AddDbContext<YourDbContext>(options =>
-            //    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection;")));
+            services.AddDbContext<YourDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             // Other middleware configurations
+            app.UseHttpsRedirection();
+            app.UseRouting();
+
+            app.UseCors("AllowAllOrigins");
 
             app.UseAuthentication();
             app.UseAuthorization();
 
+
             app.UseEndpoints(endpoints =>
-        {
-            endpoints.MapControllers();
-        });
-            }
+            {
+                endpoints.MapControllers();
+            });
+        }
     }
 }
