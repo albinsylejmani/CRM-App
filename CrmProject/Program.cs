@@ -7,12 +7,18 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name: "AllowAllOrigins",
-                      policy  =>
-                      {
-                          policy.WithOrigins("http://localhost:4200",
-                                              "http://localhost:4200");
-                      });
+    options.AddPolicy("AllowAllOrigins",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:4200")
+                  .AllowAnyHeader()
+                  .AllowAnyMethod()
+                  .AllowCredentials()
+                  .WithExposedHeaders("Content-Disposition")
+                  .WithExposedHeaders("Content-Length")
+                  .WithExposedHeaders("Content-Range")
+                  .WithHeaders("Content-Type");
+        });
 });
 
 

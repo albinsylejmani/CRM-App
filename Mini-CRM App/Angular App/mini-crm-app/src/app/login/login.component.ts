@@ -32,12 +32,12 @@ export class LoginComponent implements OnInit {
       (response) => {
         // Handle successful login
         console.log('Login successful', response);
-        // Additional logic or redirection
+        this.router.navigate(['/']);
       },
       (error) => {
         // Handle login error
         console.error('Login failed', error);
-        // Display error message or perform other actions
+        this.errorMessage = 'Invalid email or password'; // Set the error message to be displayed
       }
     );
   }

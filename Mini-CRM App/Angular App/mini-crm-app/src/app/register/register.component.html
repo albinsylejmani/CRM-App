@@ -26,8 +26,8 @@
 
       <mat-form-field appearance="outline" class="mat-field">
         <mat-label>First Name</mat-label>
-        <input matInput type="text" formControlName="name" required class="mat-input">
-        <mat-error *ngIf="registerForm.get('name')?.hasError('required') && registerForm.get('name')?.touched">
+        <input matInput type="text" formControlName="firstname" required class="mat-input">
+        <mat-error *ngIf="registerForm.get('firstname')?.hasError('required') && registerForm.get('firstname')?.touched">
           First Name is required.
         </mat-error>
       </mat-form-field>

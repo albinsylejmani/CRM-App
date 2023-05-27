@@ -7,6 +7,7 @@ using CrmProject.Repositories;
 using CrmProject.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.SqlServer;
+using Microsoft.AspNetCore.Cors;
 
 namespace CrmProject
 {
@@ -20,26 +21,26 @@ namespace CrmProject
         public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddCors(options =>
+{
+    services.AddCors(options =>
+    {
+        options.AddPolicy("AllowAllOrigins",
+            builder =>
             {
-                options.AddPolicy("AllowAllOrigins",
-                    builder =>
-                    {
-                        builder.WithOrigins("http://localhost:4200")
-                               .AllowAnyHeader()
-                               .AllowAnyMethod();
-                    });
+                builder.WithOrigins("http://localhost:4200")
+                       .AllowAnyHeader()
+                       .AllowAnyMethod()
+                       .AllowCredentials()
+                       .WithExposedHeaders("Content-Disposition")
+                       .WithExposedHeaders("Content-Length")
+                       .WithExposedHeaders("Content-Range")
+                       .WithHeaders("Content-Type");
             });
+    });
 
-            services.AddControllers();
+    // Other service configurations...
+}
 
-            services.AddScoped<IRegisterRepository, RegisterRepository>();
-            services.AddScoped<ILoginRepository, LoginRepository>();
-
-            services.AddDbContext<YourDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-        }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
