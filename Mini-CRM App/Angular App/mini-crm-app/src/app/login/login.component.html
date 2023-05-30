@@ -23,7 +23,7 @@
 
       <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">Login</button>
       
-      <div *ngIf="errorMessage" class="error-message">
+      <div style="color:red; padding-top: 17px" *ngIf="errorMessage" class="error-message">
         {{ errorMessage }}
       </div>
     </form>

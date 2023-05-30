@@ -32,7 +32,8 @@ export class LoginComponent implements OnInit {
       (response) => {
         // Handle successful login
         console.log('Login successful', response);
-        this.router.navigate(['/']);
+        this.authService.setAuthenticated();
+        this.router.navigate(['/landingpage']);
       },
       (error) => {
         // Handle login error

@@ -1,6 +1,6 @@
 .crm-homepage {
   text-align: center;
-  padding: 20px;
+  padding: 380px;
 }
 
 .crm-homepage h1 {
@@ -21,6 +21,13 @@
   border-radius: 8px;
   margin: 0 10px;
   text-align: center;
+}
+
+.butoni{
+  background-color: #4caf50;
+}
+.butoni2{
+  background-color: rgb(211, 206, 206);
 }
 
 .feature h2 {

@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup = new FormGroup({});
+  errorMessage: string = '';
 
   constructor(private fb: FormBuilder,private snackBar: MatSnackBar ,private router: Router , private authService: AuthService) { }
 
@@ -36,7 +37,7 @@ export class RegisterComponent implements OnInit {
       (error) => {
         // Handle register error
         console.error('Register failed', error);
-        
+        this.errorMessage = 'Invalid email or password';
       }
     );
   }

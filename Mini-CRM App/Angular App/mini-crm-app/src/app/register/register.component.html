@@ -41,6 +41,10 @@
       </mat-form-field>
 
       <button mat-raised-button color="primary" type="submit" [disabled]="registerForm.invalid">Register</button>
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+    
     </form>
   </div>
 </div>
