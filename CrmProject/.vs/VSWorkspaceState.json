@@ -6,6 +6,6 @@
     "\\Models",
     "\\Repository"
   ],
-  "SelectedNode": "\\Controllers\\LoginController.cs",
+  "SelectedNode": "\\Repository\\UserRepository.cs",
   "PreviewInSolutionExplorer": false
 }

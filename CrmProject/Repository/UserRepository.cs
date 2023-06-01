@@ -1,60 +1,67 @@
 using System.Collections.Generic;
 using System.Linq;
-using CrmProject.Models;
 using CrmProject.Database;
+using CrmProject.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace CrmProject.Repositories
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository
     {
         private readonly YourDbContext _dbContext;
+        private readonly UserManager<UserModel> _userManager;
 
-        public UserRepository(YourDbContext dbContext)
+        public UserRepository(YourDbContext dbContext, UserManager<UserModel> userManager)
         {
             _dbContext = dbContext;
-        }
-
-        public UserModel GetUserById(int id)
-        {
-            return _dbContext.Users.FirstOrDefault(u => u.Id == id);
-        }
-
-        public UserModel GetUserByEmail(string email)
-        {
-            return _dbContext.Users.FirstOrDefault(u => u.Email == email);
-        }
-
-        public List<UserModel> GetAllUsers()
-        {
-            return _dbContext.Users.ToList();
+            _userManager = userManager;
         }
 
         public void AddUser(UserModel user)
         {
-            _dbContext.Users.Add(user);
+            _dbContext.CustomUsers.Add(user);
             _dbContext.SaveChanges();
+        }
+
+        public UserModel GetUserById(string id)
+        {
+            if (int.TryParse(id, out int userId))
+        {
+            return _dbContext.CustomUsers.FirstOrDefault(u => u.Id == userId);
+        }
+            return null;
+        }
+
+        public UserModel GetUserByEmail(string email)
+        {
+            return _dbContext.CustomUsers.FirstOrDefault(u => u.Email == email);
+        }
+
+        public IEnumerable<UserModel> GetAllUsers()
+        {
+            return _dbContext.CustomUsers.ToList();
         }
 
         public void UpdateUser(UserModel user)
         {
-            _dbContext.Users.Update(user);
+            _dbContext.CustomUsers.Update(user);
             _dbContext.SaveChanges();
         }
 
         public void DeleteUser(UserModel user)
         {
-            _dbContext.Users.Remove(user);
+            _dbContext.CustomUsers.Remove(user);
             _dbContext.SaveChanges();
         }
 
         public IEnumerable<UserModel> GetUsersByRole(string role)
         {
-            return _dbContext.Users.Where(u => u.Role == role).ToList();
+            return _userManager.GetUsersInRoleAsync(role).Result;
         }
 
-        public IEnumerable<UserModel> GetUsersByStatus(bool isActive)
+        public IEnumerable<UserModel> GetActiveUsers()
         {
-            return _dbContext.Users.Where(u => u.IsActive == isActive).ToList();
+            return _dbContext.CustomUsers.Where(u => u.IsActive).ToList();
         }
     }
 }

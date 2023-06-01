@@ -16,6 +16,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { LogoutComponent } from './logout/logout.component'; // Import MatSnackBarModule
 import { AuthGuard } from './AuthGuard.service';
 import { AuthService } from './auth.service';
+import { ProfileComponent } from './profile/profile.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +24,8 @@ import { AuthService } from './auth.service';
     RegisterComponent,
     HomepageComponent,
     LandingPageComponent,
-    LogoutComponent
+    LogoutComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

@@ -17,6 +17,9 @@ export class RegisterComponent implements OnInit {
   constructor(private fb: FormBuilder,private snackBar: MatSnackBar ,private router: Router , private authService: AuthService) { }
 
   ngOnInit() {
+    if (this.authService.isAuthenticated()) {
+      this.router.navigate(['/landingpage']);
+    }
     this.registerForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, Validators.minLength(6)]),
@@ -31,7 +34,7 @@ export class RegisterComponent implements OnInit {
     this.authService.register(email, password, firstname, lastname).subscribe(
       (response) => {
         // Handle successful register
-        console.log('Register successful', response);
+        console.log(response);
         this.router.navigate(['/']);
       },
       (error) => {

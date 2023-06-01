@@ -22,6 +22,8 @@
       </mat-form-field>
 
       <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">Login</button>
+      <br><br>
+      <div>Don't have a account? Register here</div>
       
       <div style="color:red; padding-top: 17px" *ngIf="errorMessage" class="error-message">
         {{ errorMessage }}

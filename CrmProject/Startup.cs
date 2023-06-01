@@ -3,60 +3,59 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using CrmProject.Repositories;
-using CrmProject.Database;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.SqlServer;
-using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Identity;
+using CrmProject.Database;
 
 namespace CrmProject
 {
     public class Startup
     {
+        private readonly IConfiguration _configuration;
+
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+            _configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
-
         public void ConfigureServices(IServiceCollection services)
-{
-    services.AddCors(options =>
-    {
-        options.AddPolicy("AllowAllOrigins",
-            builder =>
-            {
-                builder.WithOrigins("http://localhost:4200")
-                       .AllowAnyHeader()
-                       .AllowAnyMethod()
-                       .AllowCredentials()
-                       .WithExposedHeaders("Content-Disposition")
-                       .WithExposedHeaders("Content-Length")
-                       .WithExposedHeaders("Content-Range")
-                       .WithHeaders("Content-Type");
-            });
-    });
+        {
+            services.AddDbContext<YourDbContext>(options =>
+                options.UseSqlServer(_configuration.GetConnectionString("DefaultConnection")));
 
-    // Other service configurations...
-}
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<YourDbContext>();
 
+            // Other service configurations
+
+            services.AddControllersWithViews();
+        }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            // Other middleware configurations
-            app.UseHttpsRedirection();
-            app.UseRouting();
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+                app.UseHsts();
+            }
 
-            app.UseCors("AllowAllOrigins");
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+
+            app.UseRouting();
 
             app.UseAuthentication();
             app.UseAuthorization();
 
-
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

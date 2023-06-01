@@ -1,13 +1,9 @@
 using System.Collections.Generic;
-using CrmProject.Models;
-//using CrmProject.Database;
 using System.Linq;
+using CrmProject.Models;
+using CrmProject.Database;
 using System.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
-
-
-
-
 
 namespace CrmProject.Repositories
 {
@@ -23,17 +19,30 @@ namespace CrmProject.Repositories
         public void RegisterUser(RegisterModel registerModel)
         {
             // Create a new UserModel entity and populate its properties
+            var user = new UserModel
+            {
+                Email = registerModel.Email,
+                Password = registerModel.Password,
+                FirstName = registerModel.FirstName,
+                LastName = registerModel.LastName,
+                Role = registerModel.Role, // Assign the role from the registerModel
+                IsActive = true // Set the initial status
+            };
+
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
 
-                string query = "INSERT INTO Users (Email, Password, FirstName, LastName) VALUES (@Email, @Password, @FirstName, @LastName)";
+                string query = "INSERT INTO Users (Email, Password, FirstName, LastName, Role, IsActive) " +
+                               "VALUES (@Email, @Password, @FirstName, @LastName, @Role, @IsActive)";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@Email", registerModel.Email);
-                    command.Parameters.AddWithValue("@Password", registerModel.Password);
-                    command.Parameters.AddWithValue("@FirstName", registerModel.FirstName);
-                    command.Parameters.AddWithValue("@LastName", registerModel.LastName);
+                    command.Parameters.AddWithValue("@Email", user.Email);
+                    command.Parameters.AddWithValue("@Password", user.Password);
+                    command.Parameters.AddWithValue("@FirstName", user.FirstName);
+                    command.Parameters.AddWithValue("@LastName", user.LastName);
+                    command.Parameters.AddWithValue("@Role", user.Role);
+                    command.Parameters.AddWithValue("@IsActive", user.IsActive);
 
                     command.ExecuteNonQuery();
                 }
@@ -57,6 +66,5 @@ namespace CrmProject.Repositories
                 }
             }
         }
-
     }
 }

@@ -20,5 +20,8 @@ namespace CrmProject.Models
         [Required]
         [MaxLength(50)]
         public string LastName { get; set; }
+
+        [Required]
+        public string Role { get; set; } // Add the Role property
     }
 }

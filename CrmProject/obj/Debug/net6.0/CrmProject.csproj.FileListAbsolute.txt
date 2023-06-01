@@ -96,3 +96,4 @@ C:\Users\albin\OneDrive\Documents\GitHub\CRM-App\CrmProject\bin\Debug\net6.0\run
 C:\Users\albin\OneDrive\Documents\GitHub\CRM-App\CrmProject\bin\Debug\net6.0\runtimes\win-x86\native\sni.dll
 C:\Users\albin\OneDrive\Documents\GitHub\CRM-App\CrmProject\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\albin\OneDrive\Documents\GitHub\CRM-App\CrmProject\bin\Debug\net6.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\albin\OneDrive\Documents\GitHub\CRM-App\CrmProject\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll

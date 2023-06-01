@@ -15,7 +15,12 @@ export class LoginComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private router: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.buildLoginForm();
+    // Check if the user is already authenticated
+    if (this.authService.isAuthenticated()) {
+      this.router.navigate(['/landingpage']);
+    } else {
+      this.buildLoginForm();
+    }
   }
 
   buildLoginForm(): void {
@@ -31,8 +36,9 @@ export class LoginComponent implements OnInit {
     this.authService.login(email, password).subscribe(
       (response) => {
         // Handle successful login
-        console.log('Login successful', response);
-        this.authService.setAuthenticated();
+        console.log(response);
+        const { token, user } = response;
+        this.authService.setAuthenticated(token, user);
         this.router.navigate(['/landingpage']);
       },
       (error) => {
