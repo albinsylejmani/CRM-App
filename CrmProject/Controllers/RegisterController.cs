@@ -32,7 +32,7 @@ namespace CrmProject.Controllers
                 // Register the user
                 _registerRepository.RegisterUser(registerModel);
 
-                return Ok("User registered successfully");
+                return Ok(new { message = "User registered successfully" });
             }
             catch (Exception ex)
             {

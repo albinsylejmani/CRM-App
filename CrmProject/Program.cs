@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using CrmProject.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,6 +29,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IRegisterRepository, RegisterRepository>();
 builder.Services.AddScoped<ILoginRepository, LoginRepository>();
+//builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 // Retrieve the connection string from the configuration
 string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");

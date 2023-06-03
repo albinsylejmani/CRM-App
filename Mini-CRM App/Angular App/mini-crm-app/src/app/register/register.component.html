@@ -40,11 +40,22 @@
         </mat-error>
       </mat-form-field>
 
+      <mat-form-field appearance="outline" class="mat-field">
+        <mat-label>Role</mat-label>
+        <mat-select formControlName="role" required class="mat-input">
+          <mat-option value="user">User</mat-option>
+          <mat-option value="admin">Admin</mat-option>
+        </mat-select>
+        <mat-error *ngIf="registerForm.get('role')?.hasError('required') && registerForm.get('role')?.touched">
+          Role is required.
+        </mat-error>
+      </mat-form-field>
+
       <button mat-raised-button color="primary" type="submit" [disabled]="registerForm.invalid">Register</button>
-      <div *ngIf="errorMessage" class="error-message">
+      
+      <div style="color:red; padding-top: 17px" *ngIf="errorMessage !== ''" class="error-message">
         {{ errorMessage }}
       </div>
-    
     </form>
   </div>
 </div>

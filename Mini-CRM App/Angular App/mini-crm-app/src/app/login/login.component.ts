@@ -23,6 +23,12 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  goToRegister(event: Event) {
+    event.preventDefault(); // Prevent the default anchor tag behavior
+    this.router.navigate(['/register']); // Navigate to the register page
+  }
+  
+
   buildLoginForm(): void {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -36,7 +42,6 @@ export class LoginComponent implements OnInit {
     this.authService.login(email, password).subscribe(
       (response) => {
         // Handle successful login
-        console.log(response);
         const { token, user } = response;
         this.authService.setAuthenticated(token, user);
         this.router.navigate(['/landingpage']);

@@ -6,6 +6,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using CrmProject.Database;
+using CrmProject.Repositories;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using CrmProject.Models;
 
 namespace CrmProject
 {
@@ -26,7 +29,13 @@ namespace CrmProject
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<YourDbContext>();
 
-            // Other service configurations
+            //services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<YourDbContext>();
+           // services.AddScoped<UserManager<UserModel>>();
+
+            //services.AddScoped<UserRepository>();
+
+            services.AddControllers();
 
             services.AddControllersWithViews();
         }

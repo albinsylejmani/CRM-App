@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { User } from './user.model';
 
@@ -25,13 +25,31 @@ export class AuthService {
       this.authenticatedUser = user;
     }
   }
-
-  register(email: string, password: string, firstname: string, lastname: string): Observable<any> {
-    const user = { email, password, firstname, lastname };
-    return this.http.post(`${this.apiUrl}/register`, user, { responseType: 'text' }).pipe(
+  //
+  register(email: string, password: string, firstname: string, lastname: string, role: string): Observable<any> {
+    const user = {
+      Email: email,
+      Password: password,
+      FirstName: firstname,
+      LastName: lastname,
+      Role: role
+    };
+  
+    return this.http.post<any>(`${this.apiUrl}/register`, user, { responseType: 'json' }).pipe(
+      map((response) => {
+        console.log('Registration response:', response);
+        
+        const { token } = response;
+        console.log('Token:', token);
+        
+        const user = this.decodeUserFromToken(token);
+        this.setAuthenticated(token, user);
+        
+        return response;
+      }),
       catchError((error) => {
         console.error('An error occurred:', error);
-        return throwError('Registration failed'); // Customize the error message as needed
+        return throwError('Registration failed');
       })
     );
   }

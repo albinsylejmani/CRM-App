@@ -17,6 +17,9 @@ import { LogoutComponent } from './logout/logout.component'; // Import MatSnackB
 import { AuthGuard } from './AuthGuard.service';
 import { AuthService } from './auth.service';
 import { ProfileComponent } from './profile/profile.component';
+import { MatSelectModule } from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +28,7 @@ import { ProfileComponent } from './profile/profile.component';
     HomepageComponent,
     LandingPageComponent,
     LogoutComponent,
-    ProfileComponent
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,7 +39,9 @@ import { ProfileComponent } from './profile/profile.component';
     MatInputModule,
     MatButtonModule,
     MatFormFieldModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatSelectModule,
+    FormsModule
   ],
   providers: [AuthGuard, AuthService],
   bootstrap: [AppComponent]

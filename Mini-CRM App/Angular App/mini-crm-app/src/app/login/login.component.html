@@ -23,7 +23,9 @@
 
       <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">Login</button>
       <br><br>
-      <div>Don't have a account? Register here</div>
+      
+      <div>Don't have an account? <a href="#" (click)="goToRegister($event)">Register here</a></div>
+
       
       <div style="color:red; padding-top: 17px" *ngIf="errorMessage" class="error-message">
         {{ errorMessage }}

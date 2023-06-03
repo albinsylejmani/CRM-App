@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using CrmProject.Models;
 using Microsoft.EntityFrameworkCore.SqlServer;
 using Microsoft.AspNetCore.Identity;
+using CrmProject.Repositories;
 
 namespace CrmProject.Database
 {

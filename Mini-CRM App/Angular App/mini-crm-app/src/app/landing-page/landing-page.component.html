@@ -22,15 +22,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>John Doe</td>
-            <td>john@example.com</td>
-            <td>Admin</td>
-          </tr>
-          <tr>
-            <td>Jane Smith</td>
-            <td>jane@example.com</td>
-            <td>User</td>
+          <tr *ngFor="let user of users">
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.role }}</td>
           </tr>
         </tbody>
       </table>

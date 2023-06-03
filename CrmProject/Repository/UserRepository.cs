@@ -3,10 +3,14 @@ using System.Linq;
 using CrmProject.Database;
 using CrmProject.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using CrmProject.Repositories;
+using System.Data.SqlClient;
+using CrmProject.Database;
 
 namespace CrmProject.Repositories
 {
-    public class UserRepository
+    public class UserRepository : IUserRepository
     {
         private readonly YourDbContext _dbContext;
         private readonly UserManager<UserModel> _userManager;
@@ -21,6 +25,11 @@ namespace CrmProject.Repositories
         {
             _dbContext.CustomUsers.Add(user);
             _dbContext.SaveChanges();
+        }
+
+        public IEnumerable<UserModel> GetUsers()
+        {
+            return _dbContext.CustomUsers.ToList();
         }
 
         public UserModel GetUserById(string id)
