@@ -19,6 +19,9 @@ import { AuthService } from './auth.service';
 import { ProfileComponent } from './profile/profile.component';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
+import { UserService } from './user.service';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -41,9 +44,11 @@ import { FormsModule } from '@angular/forms';
     MatFormFieldModule,
     MatSnackBarModule,
     MatSelectModule,
-    FormsModule
+    FormsModule,
+    MatTableModule,
+    MatPaginatorModule
   ],
-  providers: [AuthGuard, AuthService],
+  providers: [AuthGuard, AuthService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

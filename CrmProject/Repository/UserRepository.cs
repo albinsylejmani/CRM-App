@@ -7,18 +7,20 @@ using Microsoft.AspNetCore.Mvc;
 using CrmProject.Repositories;
 using System.Data.SqlClient;
 using CrmProject.Database;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace CrmProject.Repositories
 {
     public class UserRepository : IUserRepository
     {
         private readonly YourDbContext _dbContext;
-        private readonly UserManager<UserModel> _userManager;
+        private readonly List<UserModel> _users;
 
-        public UserRepository(YourDbContext dbContext, UserManager<UserModel> userManager)
+        public UserRepository(YourDbContext dbContext)
         {
             _dbContext = dbContext;
-            _userManager = userManager;
         }
 
         public void AddUser(UserModel user)
@@ -26,10 +28,12 @@ namespace CrmProject.Repositories
             _dbContext.CustomUsers.Add(user);
             _dbContext.SaveChanges();
         }
+        
 
-        public IEnumerable<UserModel> GetUsers()
+        public async Task<List<UserModel>> GetUsers()
         {
-            return _dbContext.CustomUsers.ToList();
+        string query = "SELECT * FROM CrmDB.dbo.Users WHERE Role IS NOT NULL "; // Modify the query
+         return await _dbContext.CustomUsers.FromSqlRaw(query).ToListAsync();
         }
 
         public UserModel GetUserById(string id)
@@ -63,10 +67,10 @@ namespace CrmProject.Repositories
             _dbContext.SaveChanges();
         }
 
-        public IEnumerable<UserModel> GetUsersByRole(string role)
+        /*public IEnumerable<UserModel> GetUsersByRole(string role)
         {
-            return _userManager.GetUsersInRoleAsync(role).Result;
-        }
+            return _dbContext.GetUsersInRoleAsync(role).Result;
+        }*/
 
         public IEnumerable<UserModel> GetActiveUsers()
         {

@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using CrmProject.Database;
 using CrmProject.Repositories;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using CrmProject.Models;
 
 namespace CrmProject
@@ -24,18 +23,14 @@ namespace CrmProject
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<YourDbContext>(options =>
-                options.UseSqlServer(_configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(_configuration.GetConnectionString("Data Source=(localdb)\\MSSQLLocalDB;Integrated Security=True; Catalog=CrmDB;Integrated Security=True")));
 
-            services.AddIdentity<IdentityUser, IdentityRole>()
-                .AddEntityFrameworkStores<YourDbContext>();
-
-            //services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<YourDbContext>();
-           // services.AddScoped<UserManager<UserModel>>();
-
-            //services.AddScoped<UserRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddControllers();
+
+            services.AddIdentity<UserModel, IdentityRole>()
+                .AddEntityFrameworkStores<YourDbContext>();
 
             services.AddControllersWithViews();
         }

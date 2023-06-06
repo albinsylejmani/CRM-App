@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using CrmProject.Models;
 using CrmProject.Repositories;
+using System.Threading.Tasks;
 
 namespace CrmProject.Repositories
 {
@@ -12,8 +13,8 @@ namespace CrmProject.Repositories
         //List<UserModel> GetAllUsers();
         void UpdateUser(UserModel user);
         void DeleteUser(UserModel user);
-        IEnumerable<UserModel> GetUsersByRole(string role);
+        //IEnumerable<UserModel> GetUsersByRole(string role);
         //IEnumerable<UserModel> GetUsersByStatus(bool isActive);
-        IEnumerable<UserModel> GetUsers();
+        Task<List<UserModel>> GetUsers();
     }
 }

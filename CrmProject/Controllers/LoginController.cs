@@ -9,6 +9,7 @@ namespace CrmProject.Controllers
     public class LoginController : ControllerBase
     {
         private readonly ILoginRepository _loginRepository;
+        private readonly IUserRepository _userRepository; 
 
         public LoginController(ILoginRepository loginRepository)
         {

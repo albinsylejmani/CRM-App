@@ -34,7 +34,6 @@ C:\Users\albin\OneDrive\Documents\GitHub\CRM-App\CrmProject\bin\Debug\net6.0\Mic
 C:\Users\albin\OneDrive\Documents\GitHub\CRM-App\CrmProject\bin\Debug\net6.0\Microsoft.CodeAnalysis.CSharp.dll
 C:\Users\albin\OneDrive\Documents\GitHub\CRM-App\CrmProject\bin\Debug\net6.0\Microsoft.CodeAnalysis.Razor.dll
 C:\Users\albin\OneDrive\Documents\GitHub\CRM-App\CrmProject\bin\Debug\net6.0\Microsoft.Data.SqlClient.dll
-C:\Users\albin\OneDrive\Documents\GitHub\CRM-App\CrmProject\bin\Debug\net6.0\Microsoft.DotNet.PlatformAbstractions.dll
 C:\Users\albin\OneDrive\Documents\GitHub\CRM-App\CrmProject\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
 C:\Users\albin\OneDrive\Documents\GitHub\CRM-App\CrmProject\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
 C:\Users\albin\OneDrive\Documents\GitHub\CRM-App\CrmProject\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
@@ -97,3 +96,8 @@ C:\Users\albin\OneDrive\Documents\GitHub\CRM-App\CrmProject\bin\Debug\net6.0\run
 C:\Users\albin\OneDrive\Documents\GitHub\CRM-App\CrmProject\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\albin\OneDrive\Documents\GitHub\CRM-App\CrmProject\bin\Debug\net6.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\albin\OneDrive\Documents\GitHub\CRM-App\CrmProject\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\albin\OneDrive\Documents\GitHub\CRM-App\CrmProject\bin\Debug\net6.0\Humanizer.dll
+C:\Users\albin\OneDrive\Documents\GitHub\CRM-App\CrmProject\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\albin\OneDrive\Documents\GitHub\CRM-App\CrmProject\bin\Debug\net6.0\Mono.TextTemplating.dll
+C:\Users\albin\OneDrive\Documents\GitHub\CRM-App\CrmProject\bin\Debug\net6.0\System.CodeDom.dll
+C:\Users\albin\OneDrive\Documents\GitHub\CRM-App\CrmProject\bin\Debug\net6.0\System.Linq.Async.dll

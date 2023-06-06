@@ -1,6 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using CrmProject.Models;
 using CrmProject.Repositories;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace CrmProject.Controllers
 {
@@ -12,14 +15,15 @@ namespace CrmProject.Controllers
 
         public UserController(IUserRepository userRepository)
         {
-            _userRepository = userRepository;
+            _userRepository =  userRepository; // Instantiate UserRepository directly
         }
 
         [HttpGet]
-        public IActionResult GetUsers()
+            public async Task<IActionResult> GetUsers()
         {
-            var users = _userRepository.GetUsers();
-            return Ok(users);
+            var users = await _userRepository.GetUsers();
+            var userList = users.ToList();
+            return Ok(userList);
         }
     }
 }
