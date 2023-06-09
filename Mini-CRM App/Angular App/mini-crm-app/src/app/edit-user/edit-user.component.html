@@ -1,0 +1,13 @@
+<h1>Edit User</h1>
+
+<!-- Display the user details -->
+<div *ngIf="user">
+  <p>{{ user.firstName }} {{ user.lastName }}</p>
+  <p>{{ user.email }}</p>
+  <!-- Add other user properties as needed -->
+</div>
+
+<!-- Update user form -->
+<!-- <form (ngSubmit)="updateUser()">
+  <button type="submit">Update</button>
+</form> -->

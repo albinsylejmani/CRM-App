@@ -8,7 +8,7 @@ namespace CrmProject.Repositories
     public interface IUserRepository
     {
         void AddUser(UserModel user);
-        UserModel GetUserById(string id);
+        Task<UserModel> GetUserById(string id);
         UserModel GetUserByEmail(string email);
         //List<UserModel> GetAllUsers();
         void UpdateUser(UserModel user);

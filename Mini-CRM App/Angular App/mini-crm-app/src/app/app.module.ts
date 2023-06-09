@@ -22,6 +22,11 @@ import { FormsModule } from '@angular/forms';
 import { UserService } from './user.service';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { CreateUserComponent } from './create-user/create-user.component';
+import {MatCard, MatCardModule} from '@angular/material/card';
+import { UserViewComponent } from './user-view/user-view.component';
+import { EditUserComponent } from './edit-user/edit-user.component';
+
 
 @NgModule({
   declarations: [
@@ -32,6 +37,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     LandingPageComponent,
     LogoutComponent,
     ProfileComponent,
+    CreateUserComponent,
+    UserViewComponent,
+    EditUserComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,7 +54,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatSelectModule,
     FormsModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatCardModule
   ],
   providers: [AuthGuard, AuthService, UserService],
   bootstrap: [AppComponent]

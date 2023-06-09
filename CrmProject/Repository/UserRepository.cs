@@ -36,14 +36,17 @@ namespace CrmProject.Repositories
          return await _dbContext.CustomUsers.FromSqlRaw(query).ToListAsync();
         }
 
-        public UserModel GetUserById(string id)
+        public async Task<UserModel> GetUserById(string id)
         {
             if (int.TryParse(id, out int userId))
         {
-            return _dbContext.CustomUsers.FirstOrDefault(u => u.Id == userId);
+            string query = "SELECT * FROM CrmDB.dbo.Users WHERE Role IS NOT NULL AND Id = @UserId";
+            return await _dbContext.CustomUsers.FromSqlRaw(query, new Microsoft.Data.SqlClient.SqlParameter("@UserId", userId)).FirstOrDefaultAsync();
         }
+
             return null;
         }
+
 
         public UserModel GetUserByEmail(string email)
         {
@@ -55,11 +58,26 @@ namespace CrmProject.Repositories
             return _dbContext.CustomUsers.ToList();
         }
 
-        public void UpdateUser(UserModel user)
-        {
-            _dbContext.CustomUsers.Update(user);
-            _dbContext.SaveChanges();
-        }
+       public void UpdateUser(UserModel user)
+{
+    string query = "UPDATE Users SET " +
+                   "FirstName = @FirstName, " +
+                   "LastName = @LastName, " +
+                   "Email = @Email, " +
+                   "Role = @Role, " +
+                   "IsActive = @IsActive " +
+                   "WHERE Id = @Id";
+
+    _dbContext.Database.ExecuteSqlRaw(query,
+        new Microsoft.Data.SqlClient.SqlParameter("@FirstName", user.FirstName),
+        new Microsoft.Data.SqlClient.SqlParameter("@LastName", user.LastName),
+        new Microsoft.Data.SqlClient.SqlParameter("@Email", user.Email),
+        new Microsoft.Data.SqlClient.SqlParameter("@Role", user.Role),
+        new Microsoft.Data.SqlClient.SqlParameter("@IsActive", user.IsActive),
+        new Microsoft.Data.SqlClient.SqlParameter("@Id", user.Id));
+
+    _dbContext.SaveChanges();
+}
 
         public void DeleteUser(UserModel user)
         {

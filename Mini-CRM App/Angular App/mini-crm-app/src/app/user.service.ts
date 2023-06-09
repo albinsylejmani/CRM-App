@@ -9,10 +9,17 @@ import { Router } from '@angular/router';
 })
 export class UserService {
   private apiUrl = 'https://localhost:7015/api';
+  private apiUrl2 = 'https://localhost:7015/api/users';
 
   constructor(private http: HttpClient,private router: Router) {}
 
   getUsers(): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/users`);
+  }
+  getUserById(id: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl2}/${id}`);
+  }
+  updateUser(id: string, updatedUser: User): Observable<User> {
+    return this.http.put<User>(`${this.apiUrl}/users/${id}`, updatedUser);
   }
 }

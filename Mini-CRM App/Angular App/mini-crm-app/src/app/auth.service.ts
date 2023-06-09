@@ -25,7 +25,27 @@ export class AuthService {
       this.authenticatedUser = user;
     }
   }
-  //
+  
+  createUser(email: string, password: string, firstName: string, lastName: string, role: string): Observable<any> {
+    const user = {
+      Email: email,
+      Password: password,
+      FirstName: firstName,
+      LastName: lastName,
+      Role: role
+    };
+
+    return this.http.post<any>(`${this.apiUrl}/register`, user, { responseType: 'json' }).pipe(
+      catchError((error) => {
+        console.error('An error occurred:', error);
+        return throwError('User creation failed');
+      })
+    );
+  }
+
+
+  
+
   register(email: string, password: string, firstname: string, lastname: string, role: string): Observable<any> {
     const user = {
       Email: email,
@@ -88,21 +108,25 @@ export class AuthService {
     return this.authenticatedUser;
   }
 
-  private decodeUserFromToken(token: string): User {
-    // Decode and extract the user information from the token
-    // Replace this with your own token decoding logic
-    const decodedToken: any = {}; // Replace this with the actual decoding logic
+private decodeUserFromToken(token: string): User {
+  // Decode and extract the user information from the token
+  // Replace this with your own token decoding logic
+  const decodedToken: any = {}; // Replace this with the actual decoding logic
 
-    // Extract user properties from the decoded token
-    const { id, name, role } = decodedToken;
+  // Extract user properties from the decoded token
+  const { userId, userName, userRole } = decodedToken;
 
-    // Create a user object
-    const user: User = {
-      id,
-      name,
-      role
-    };
+  // Create a user object
+  const user: User = {
+    id: userId,  // Replace "id" with the correct property name
+    firstName: userName,
+    lastName: '',  // Update this line to the correct property name
+    email: '',  // Update this line to the correct property name
+    role: userRole,
+    isActive: false,  // Provide an appropriate default value
+  };
 
-    return user;
-  }
+  return user;
+}
+  
 }

@@ -1,0 +1,38 @@
+.user-card {
+    width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 4px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .user-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .user-card-title {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .user-card-content {
+    margin-top: 20px;
+  }
+  
+  .user-field {
+    display: flex;
+    margin-bottom: 10px;
+  }
+  
+  .user-field-label {
+    width: 100px;
+    font-weight: bold;
+  }
+  
+  .user-field-value {
+    flex-grow: 1;
+  }
+  

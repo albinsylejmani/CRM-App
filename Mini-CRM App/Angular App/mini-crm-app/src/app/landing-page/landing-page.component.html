@@ -3,15 +3,15 @@
     <ul>
       <!-- <li><button mat-raised-button>Home</button></li>
       <li><button mat-raised-button>Contact</button></li> -->
-      <li><button mat-raised-button color="primary" (click)="logout()">Logout</button></li>
+      <li><button mat-raised-button color="warn" (click)="logout()">Logout</button></li>
     </ul>
   </nav>
 </header>
 
 <main>
   <div class="container">
-    <h1>Welcome to My App</h1>
-    <p>Some content goes here...</p>
+    <h1>USERS</h1>
+    <button mat-raised-button color="primary" style="margin-left: 360px; margin-bottom: 5px;" (click)="create()">Create</button>
     
     <div class="table-wrapper">
       <table mat-table [dataSource]="users" class="mat-elevation-z8">
@@ -21,7 +21,12 @@
           <td mat-cell *matCellDef="let user">{{ user.firstName }}</td>
         </ng-container>
         
-        <ng-container matColumnDef="email">
+        <ng-container matColumnDef="lastName">
+          <th mat-header-cell *matHeaderCellDef>Last Name</th>
+          <td mat-cell *matCellDef="let user">{{ user.lastName }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="email" sty>
           <th mat-header-cell *matHeaderCellDef>Email</th>
           <td mat-cell *matCellDef="let user">{{ user.email }}</td>
         </ng-container>
@@ -36,9 +41,9 @@
           <td mat-cell *matCellDef="let user">
             <!-- Dropdown with view, edit, delete options -->
             <mat-select>
-              <mat-option>View</mat-option>
-              <mat-option>Edit</mat-option>
-              <mat-option>Delete</mat-option>
+              <mat-option (click)="userView(user.id)">View</mat-option>
+              <mat-option (click)="userEdit(user.id)">Edit</mat-option>
+              <mat-option style="color: red">Delete</mat-option>
             </mat-select>
           </td>
         </ng-container>

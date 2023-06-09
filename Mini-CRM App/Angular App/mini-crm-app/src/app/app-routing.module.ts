@@ -7,6 +7,9 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { AuthGuard } from './AuthGuard.service';
 import { LogoutComponent } from './logout/logout.component';
 import { AuthService } from './auth.service';
+import { CreateUserComponent } from './create-user/create-user.component';
+import { UserViewComponent } from './user-view/user-view.component';
+import { EditUserComponent } from './edit-user/edit-user.component';
 
 const routes: Routes = [
   { path: 'homepage', component: HomepageComponent },
@@ -14,7 +17,10 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'landingpage', component: LandingPageComponent, canActivate: [AuthGuard] },
   { path: 'logout', component: LogoutComponent },
-  { path: '', component: HomepageComponent } // Add this redirect route
+  { path: '', component: HomepageComponent }, // Add this redirect route
+  { path: 'createuser', component: CreateUserComponent, canActivate: [AuthGuard] },
+  { path: 'users/:id', component: UserViewComponent },
+  { path: 'users/edit/:id', component: EditUserComponent,  canActivate: [AuthGuard] }
 ];
 
 @NgModule({
