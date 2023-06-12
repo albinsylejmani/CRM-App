@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from './user.model';
 import { Router } from '@angular/router';
+import { HttpHeaders } from '@angular/common/http';
+import { HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -21,5 +23,8 @@ export class UserService {
   }
   updateUser(id: string, updatedUser: User): Observable<User> {
     return this.http.put<User>(`${this.apiUrl}/users/${id}`, updatedUser);
+  }
+  deleteUser(id: string, deletedUser: User): Observable<User> {
+    return this.http.delete<User>(`${this.apiUrl}/users/${id}`, {body: deletedUser});
   }
 }

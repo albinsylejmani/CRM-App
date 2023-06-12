@@ -1,0 +1,28 @@
+<div class="user-card" *ngIf="user">
+    <div class="user-card-header">
+      <h3 class="user-card-title">User Details</h3>
+    </div>
+    <div class="user-card-content">
+      <div class="user-field">
+        <label class="user-field-label">Name:</label>
+        <span class="user-field-value">{{ user.firstName }}</span>
+      </div>
+      <div class="user-field">
+        <label class="user-field-label">Last Name:</label>
+        <span class="user-field-value">{{ user.lastName }}</span>
+      </div>
+      <div class="user-field">
+        <label class="user-field-label">Email:</label>
+        <span class="user-field-value">{{ user.email }}</span>
+      </div>
+      <div class="user-field">
+        <label class="user-field-label">Role:</label>
+        <span class="user-field-value">{{ user.role }}</span>
+      </div>
+      <div class="user-field">
+        <label class="user-field-label">Active:</label>
+        <span class="user-field-value">{{ user.isActive }}</span>
+      </div>
+      <!-- <button class="delete-button" (click)="deleteUser()">Delete User</button> -->
+    </div>
+  </div>

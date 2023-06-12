@@ -17,10 +17,12 @@ namespace CrmProject.Repositories
     {
         private readonly YourDbContext _dbContext;
         private readonly List<UserModel> _users;
+        private readonly string _connectionString;
 
-        public UserRepository(YourDbContext dbContext)
+        public UserRepository(YourDbContext dbContext, IConfiguration configuration)
         {
             _dbContext = dbContext;
+            _connectionString = configuration.GetConnectionString("DefaultConnection");
         }
 
         public void AddUser(UserModel user)
@@ -58,32 +60,53 @@ namespace CrmProject.Repositories
             return _dbContext.CustomUsers.ToList();
         }
 
-       public void UpdateUser(UserModel user)
-{
-    string query = "UPDATE Users SET " +
-                   "FirstName = @FirstName, " +
-                   "LastName = @LastName, " +
-                   "Email = @Email, " +
-                   "Role = @Role, " +
-                   "IsActive = @IsActive " +
-                   "WHERE Id = @Id";
+        public void UpdateUser(UserModel user)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+        {
+            connection.Open();
 
-    _dbContext.Database.ExecuteSqlRaw(query,
-        new Microsoft.Data.SqlClient.SqlParameter("@FirstName", user.FirstName),
-        new Microsoft.Data.SqlClient.SqlParameter("@LastName", user.LastName),
-        new Microsoft.Data.SqlClient.SqlParameter("@Email", user.Email),
-        new Microsoft.Data.SqlClient.SqlParameter("@Role", user.Role),
-        new Microsoft.Data.SqlClient.SqlParameter("@IsActive", user.IsActive),
-        new Microsoft.Data.SqlClient.SqlParameter("@Id", user.Id));
+        string query = "UPDATE Users SET " +
+                       "Email = @Email, " +
+                       "Password = @Password, " +
+                       "FirstName = @FirstName, " +
+                       "LastName = @LastName, " +
+                       "Role = @Role, " +
+                       "IsActive = @IsActive " +
+                       "WHERE Id = @Id";
 
-    _dbContext.SaveChanges();
-}
+            using (SqlCommand command = new SqlCommand(query, connection))
+            {
+                command.Parameters.AddWithValue("@Email", user.Email);
+                command.Parameters.AddWithValue("@Password", user.Password);
+                command.Parameters.AddWithValue("@FirstName", user.FirstName);
+                command.Parameters.AddWithValue("@LastName", user.LastName);
+                command.Parameters.AddWithValue("@Role", user.Role);
+                command.Parameters.AddWithValue("@IsActive", user.IsActive);
+                command.Parameters.AddWithValue("@Id", user.Id);
+
+                command.ExecuteNonQuery();
+            }
+        }
+    }
+
 
         public void DeleteUser(UserModel user)
+{
+    using (SqlConnection connection = new SqlConnection(_connectionString))
+    {
+        connection.Open();
+
+        string query = "DELETE FROM Users WHERE Id = @Id";
+
+        using (SqlCommand command = new SqlCommand(query, connection))
         {
-            _dbContext.CustomUsers.Remove(user);
-            _dbContext.SaveChanges();
+            command.Parameters.AddWithValue("@Id", user.Id);
+
+            command.ExecuteNonQuery();
         }
+    }
+}
 
         /*public IEnumerable<UserModel> GetUsersByRole(string role)
         {

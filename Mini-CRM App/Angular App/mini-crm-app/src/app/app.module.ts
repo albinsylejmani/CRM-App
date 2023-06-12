@@ -26,7 +26,8 @@ import { CreateUserComponent } from './create-user/create-user.component';
 import {MatCard, MatCardModule} from '@angular/material/card';
 import { UserViewComponent } from './user-view/user-view.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
-
+import { ToastrModule } from 'ngx-toastr';
+import { DeleteUserComponent } from './delete-user/delete-user.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { EditUserComponent } from './edit-user/edit-user.component';
     CreateUserComponent,
     UserViewComponent,
     EditUserComponent,
+    DeleteUserComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,7 +57,9 @@ import { EditUserComponent } from './edit-user/edit-user.component';
     FormsModule,
     MatTableModule,
     MatPaginatorModule,
-    MatCardModule
+    MatCardModule,
+    ToastrModule.forRoot()
+
   ],
   providers: [AuthGuard, AuthService, UserService],
   bootstrap: [AppComponent]

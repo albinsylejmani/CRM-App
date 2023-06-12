@@ -68,3 +68,16 @@ h1 {
 .custom-table tr:hover {
   background-color: #eaeaea;
 }
+.toast-success {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.toast-success .toast-close-button {
+  color: #fff;
+}
+
+.toast-top-right {
+  top: 12px;
+  right: 12px;
+}

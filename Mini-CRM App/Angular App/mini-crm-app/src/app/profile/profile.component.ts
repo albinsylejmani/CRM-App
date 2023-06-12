@@ -1,4 +1,3 @@
-// ProfileComponent
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AuthorizationService } from '../authorization-service.service';
@@ -10,15 +9,15 @@ import { AuthorizationService } from '../authorization-service.service';
 })
 export class ProfileComponent {
   userId: number;
+  canViewProfile: boolean;
+  canManageProfiles: boolean;
 
   constructor(
     private route: ActivatedRoute,
     private authorizationService: AuthorizationService
   ) {
     this.userId = +this.route.snapshot.params['id'];
-  }
-
-  canViewProfile(): boolean {
-    return this.authorizationService.canViewProfile(this.userId);
+    this.canViewProfile = this.authorizationService.canViewProfile(this.userId);
+    this.canManageProfiles = this.authorizationService.canManageProfiles();
   }
 }

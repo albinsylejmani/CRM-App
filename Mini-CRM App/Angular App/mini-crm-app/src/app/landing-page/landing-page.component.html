@@ -33,7 +33,8 @@
         
         <ng-container matColumnDef="role">
           <th mat-header-cell *matHeaderCellDef>Role</th>
-          <td mat-cell *matCellDef="let user">{{ user.role }}</td>
+          <td mat-cell *matCellDef="let user">{{ user.role.charAt(0).toUpperCase() + user.role.slice(1) }}</td>
+
         </ng-container>
         
         <ng-container matColumnDef="actions">
@@ -43,7 +44,8 @@
             <mat-select>
               <mat-option (click)="userView(user.id)">View</mat-option>
               <mat-option (click)="userEdit(user.id)">Edit</mat-option>
-              <mat-option style="color: red">Delete</mat-option>
+              <mat-option (click)="deleteUser(user)" style="color: red">Delete</mat-option>
+            
             </mat-select>
           </td>
         </ng-container>

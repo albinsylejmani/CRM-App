@@ -58,5 +58,24 @@ namespace CrmProject.Controllers
 
             return Ok(user);
         }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteUser(string id, UserModel deletedUser)
+        {
+            var user = await _userRepository.GetUserById(id);
+            if (user == null)
+            {
+                return NotFound(); // Return 404 Not Found if the user does not exist
+            }
+
+            user.FirstName = deletedUser.FirstName;
+            user.LastName = deletedUser.LastName;
+            user.Email = deletedUser.Email;
+            user.Role = deletedUser.Role;
+            user.IsActive = deletedUser.IsActive;
+
+            _userRepository.DeleteUser(user);
+
+            return NoContent(); // Return 204 No Content to indicate successful deletion
+        }
     }
 }

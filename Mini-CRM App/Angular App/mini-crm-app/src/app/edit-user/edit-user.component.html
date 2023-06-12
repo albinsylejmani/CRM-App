@@ -1,13 +1,29 @@
-<h1>Edit User</h1>
-
-<!-- Display the user details -->
+<h2>Edit User</h2>
 <div *ngIf="user">
-  <p>{{ user.firstName }} {{ user.lastName }}</p>
-  <p>{{ user.email }}</p>
-  <!-- Add other user properties as needed -->
+  <form (ngSubmit)="saveUser()" #userForm="ngForm">
+    <div>
+      <label for="firstName">First Name</label>
+      <input type="text" id="firstName" name="firstName" [(ngModel)]="user.firstName" required>
+    </div>
+    <div>
+      <label for="lastName">Last Name</label>
+      <input type="text" id="lastName" name="lastName" [(ngModel)]="user.lastName" required>
+    </div>
+    <div>
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" [(ngModel)]="user.email" required>
+    </div>
+    <div>
+      <label for="role">Role</label>
+      <input type="text" id="role" name="role" readonly [(ngModel)]="user.role" required>
+    </div>
+    <button type="submit" class="btn btn-sm btn-success" (click)="showSuccess()">Save</button>
+  </form>
 </div>
 
-<!-- Update user form -->
-<!-- <form (ngSubmit)="updateUser()">
-  <button type="submit">Update</button>
-</form> -->
+<ng-template #customToastTemplate>
+  <div class="toast-success">
+    <div class="toast-close-button">&times;</div>
+    <div>An example success alert with an icon</div>
+  </div>
+</ng-template>
